@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Boy's Day 19/11</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fdeff4;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 40px;
+      margin-top: 40px;
+      animation: float 3s ease-in-out infinite;
+    }
+    h2 {
+      font-size: 26px;
+      margin-top: -10px;
+      animation: fade 2.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes fade {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+    .img-floating {
+      width: 130px;
+      position: absolute;
+      animation: float 4s ease-in-out infinite;
+    }
+    #q-section {
+      margin-top: 120px;
+      font-size: 24px;
+      display: none;
+    }
+    .btn {
+      padding: 12px 28px;
+      border-radius: 12px;
+      border: none;
+      margin: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      background: #ff9bbd;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Boy's Day 19/11</h1>
+  <h2>Anh Yêu ❤️</h2>
+
+  <img src="https://i.ibb.co/5M2dqfH/heart1.png" class="img-floating" style="top:120px; left:20px; animation-delay:0.2s;">
+  <img src="https://i.ibb.co/5M2dqfH/heart1.png" class="img-floating" style="top:200px; right:20px; animation-delay:0.8s;">
+  <img src="https://i.ibb.co/5M2dqfH/heart1.png" class="img-floating" style="top:300px; left:50px; animation-delay:1.3s;">
+
+  <div id="q-section">
+    <p id="question">Anh có yêu em không? 🥺</p>
+    <div id="answers"></div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      document.getElementById("q-section").style.display = "block";
+      firstQuestion();
+    };
+
+    function firstQuestion() {
+      const q = document.getElementById("question");
+      const ans = document.getElementById("answers");
+      q.innerHTML = "Anh có yêu em không? 🥺";
+      ans.innerHTML = `
+        <button class="btn" onclick="goToSecondQuestion()">Có</button>
+        <button class="btn" onclick="forceYes()">Không</button>
+      `;
+    }
+
+    function forceYes() {
+      const q = document.getElementById("question");
+      const ans = document.getElementById("answers");
+      q.innerHTML = "Chọn lại đi 😏";
+      ans.innerHTML = `
+        <button class="btn" onclick="goToSecondQuestion()">Có</button>
+        <button class="btn" onclick="goToSecondQuestion()">Có</button>
+      `;
+    }
+
+    function goToSecondQuestion() {
+      const q = document.getElementById("question");
+      const ans = document.getElementById("answers");
+      q.innerHTML = "Đằng ấy mai có muốn đi chơi với em không? 😘";
+      ans.innerHTML = `
+        <button class="btn" onclick="finalQuestion()">Anh có</button>
+        <button class="btn" onclick="finalQuestion()">Đi chứ</button>
+      `;
+    }
+
+    function finalQuestion() {
+      const q = document.getElementById("question");
+      const ans = document.getElementById("answers");
+      q.innerHTML = "Điii nhưng mà anh muốn đi đâu?";
+      ans.innerHTML = `
+        <button class="btn" onclick="toMessage()">Sang mess nhắn nhíe 💌</button>
+      `;
+    }
+
+    function toMessage() {
+      window.location.href = "#thong-diep";
+    }
+  </script>
+
+  <div id="thong-diep" style="margin-top:200px; font-size:22px; padding:20px;">
+    <p><i>(Chỗ này để bạn bổ sung thông điệp gửi người yêu ❤️)</i></p>
+  </div>
+</body>
+</html>
