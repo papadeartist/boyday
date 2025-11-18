@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Boy's Day 19/11</title>
+
 <style>
     body {
         margin: 0;
+        padding: 0;
         font-family: "Segoe UI", sans-serif;
         background: linear-gradient(#ffd6e7, #ffeef3);
         overflow-x: hidden;
@@ -31,13 +33,23 @@
     .container {
         width: 90%;
         max-width: 900px;
-        margin: auto;
+        margin: 20px auto;
         font-size: 20px;
         line-height: 1.7;
         color: #333;
-        margin-bottom: 80px;
+        min-height: 30vh;
     }
 
+    /* typing */
+    #message {
+        display: inline-block;
+        border-right: 2px solid #ff4d8d;
+        white-space: pre-wrap;
+        overflow: hidden;
+        padding-right: 10px;
+    }
+
+    /* box câu hỏi */
     .question-box, .ask-out {
         display: none;
         text-align: center;
@@ -45,12 +57,12 @@
     }
 
     .btn {
-        padding: 10px 25px;
+        padding: 12px 28px;
         background: #ff5f94;
         color: white;
         border: none;
         border-radius: 12px;
-        font-size: 18px;
+        font-size: 20px;
         margin: 15px;
         cursor: pointer;
         transition: 0.2s;
@@ -66,24 +78,18 @@
         position: fixed;
         top: -10px;
         color: #ff5f94;
-        font-size: 25px;
-        animation: fall 4s linear infinite;
-        z-index: 0;
+        font-size: 20px;
+        animation: fall 4.5s linear forwards;
+        z-index: 1;
     }
 
     @keyframes fall {
         0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
         100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
-
-    /* Gõ chữ */
-    .typing {
-        border-right: 2px solid #ff4d8d;
-        white-space: pre-wrap;
-        overflow: hidden;
-    }
 </style>
 </head>
+
 <body>
 
 <!-- Nhạc nền -->
@@ -92,32 +98,32 @@
 <h1>Happy Boy's Day 19/11</h1>
 <h2>Babi ❤️</h2>
 
-<!-- Thông điệp -->
 <div class="container">
-    <p id="message" class="typing"></p>
+    <p id="message"></p>
 </div>
 
-<!-- Câu hỏi -->
+<!-- Hộp câu hỏi -->
 <div class="question-box" id="questionBox">
     <h2>Đằng ấy có yêu em hong? 🥺💗</h2>
     <button class="btn" onclick="yesLove()">Có 💞</button>
     <button class="btn" onclick="noLove()">Không 😳</button>
 </div>
 
-<!-- Chọn lại màn -->
+<!-- Chọn lại -->
 <div class="ask-out" id="noBox">
     <h2>Chọn lại đi 😡😡😡</h2>
-    <button class="btn" onclick="backQuestion()">Em xin lỗi màaaa 😭💗</button>
+    <button class="btn" onclick="backQuestion()">Em xin lỗi mà 😭💗</button>
 </div>
 
 <!-- Đi chơi -->
 <div class="ask-out" id="yesBox">
     <h2>Vậy mai đằng ấy có muốn đi chơi với em hong? 😳💗</h2>
-    <button class="btn">Cóaa 😚💞</button>
+    <button class="btn">Cóaaa 😚💞</button>
 </div>
 
+
 <script>
-/* Hiệu ứng gõ chữ */
+/* Text message */
 const text = 
 `Chào đằng ấy nhéee 💗
 
@@ -128,7 +134,7 @@ Không muốn sến nhưng mà cảm ơn đằng ấy take care mình tận tìn
 Có gì đưa review của mình cho khách sau xem cũng được :)))
 
 Nhưng màaa hay khóc nhè cá, mít ướt ghê. Em biết là định hướng của em làm anh lo với suy nghĩ nhiều,
-em cũng không hứa sẽ bên nhau trọn đời:)) hay gì đâu nhưng mình cứ hết mình ở hiện tại ii.
+em cũng không hứa sẽ bên nhau trọn đời hay gì đâu nhưng mình cứ hết mình ở hiện tại ii.
 
 À với cả em cũng muốn anh phát triển bản thân, nhưng cũng không muốn anh bị áp lực quá :))
 Em thấy vừa phát triển vừa have fun vẫn tốt hơn là anh phải suy nghĩ làm sao để làm được điều gì thật lớn.
@@ -136,7 +142,7 @@ Em thấy vừa phát triển vừa have fun vẫn tốt hơn là anh phải suy
 Nay nhắn nhủ bbi phải sống thoải mái, không phải lo lắng gì cạ.
 Wo ai nii, Saranghae, iu anhhh 💗💗💗
 
-Giờ qua mess reaction em xem nàoo`;
+Giờ trả lời câu hỏi của em nhé…`;
 
 let i = 0;
 function typeEffect() {
@@ -150,19 +156,20 @@ function typeEffect() {
 }
 typeEffect();
 
-/* Trái tim rơi rộng toàn màn */
+/* Heart animation */
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    heart.style.left = Math.random() * 98 + "vw";
+    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
+    setTimeout(() => heart.remove(), 6000);
 }
-setInterval(createHeart, 200);
+setInterval(createHeart, 250);
 
-/* Câu hỏi logic */
+/* Logic câu hỏi */
 function yesLove() {
     document.getElementById("questionBox").style.display = "none";
     document.getElementById("yesBox").style.display = "block";
