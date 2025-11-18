@@ -4,172 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Boy's Day 19/11</title>
-
 <style>
     body {
-        background: url('images/5.jpg') no-repeat center center fixed;
-        background-size: cover;
-        font-family: Arial, sans-serif;
         margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-    .container {
-        padding-top: 40px;
-        background-color: rgba(255, 240, 245, 0.8);
-        min-height: 100vh;
-        position: relative;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(#ffd6e7, #ffeef3);
+        overflow-x: hidden;
     }
 
     h1 {
-        font-size: 48px;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 40px;
         color: #333;
-        font-weight: bold;
-        margin-bottom: 5px;
+        font-weight: 700;
     }
 
-    .subtitle {
-        font-size: 26px;
-        margin-top: -5px;
-        color: #ff3d6c;
-        font-weight: bold;
+    h2 {
+        text-align: center;
+        margin-top: -10px;
+        font-size: 24px;
+        color: #ff4d8d;
+        font-weight: 600;
     }
 
-    .question {
-        margin-top: 40px;
-        font-size: 26px;
-        font-weight: 500;
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: auto;
+        font-size: 20px;
+        line-height: 1.7;
+        color: #333;
+        margin-bottom: 80px;
     }
 
-    button {
-        margin: 12px;
-        padding: 14px 30px;
-        background-color: #ff8eb3;
+    .question-box, .ask-out {
+        display: none;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        background: #ff5f94;
         color: white;
         border: none;
-        border-radius: 15px;
-        font-size: 20px;
+        border-radius: 12px;
+        font-size: 18px;
+        margin: 15px;
         cursor: pointer;
-        transition: 0.3s;
+        transition: 0.2s;
     }
 
-    button:hover {
-        background-color: #ff6e9d;
-        transform: scale(1.05);
-    }
-
-    /* Ảnh trang trí hai bên */
-    .side-img {
-        width: 160px;
-        border-radius: 18px;
-        position: absolute;
-        box-shadow: 0 0 15px rgba(255, 100, 130, 0.7);
-    }
-
-    .left-top { left: 20px; top: 70px; }
-    .left-bottom { left: 20px; top: 310px; }
-    .right-top { right: 20px; top: 70px; }
-    .right-bottom { right: 20px; top: 310px; }
-
-    /* Icon glow online */
-    .glow {
-        position: absolute;
-        width: 22px;
-        height: 22px;
-        background: #00ff00;
-        border-radius: 50%;
-        box-shadow: 0 0 12px #00ff00, 0 0 22px #00ff00;
-        animation: pulse 1.4s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(0.9); opacity: 0.7; }
-        50% { transform: scale(1.2); opacity: 1; }
-        100% { transform: scale(0.9); opacity: 0.7; }
+    .btn:hover {
+        transform: scale(1.1);
+        background: #ff3e80;
     }
 
     /* Trái tim rơi */
     .heart {
         position: fixed;
         top: -10px;
-        color: #ff5e7e;
-        font-size: 24px;
-        animation: fall 3s linear forwards;
-        pointer-events: none;
-        z-index: 9999;
+        color: #ff5f94;
+        font-size: 25px;
+        animation: fall 4s linear infinite;
+        z-index: 0;
     }
 
     @keyframes fall {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
+    /* Gõ chữ */
+    .typing {
+        border-right: 2px solid #ff4d8d;
+        white-space: pre-wrap;
+        overflow: hidden;
+    }
 </style>
 </head>
-
 <body>
 
+<!-- Nhạc nền -->
+<audio id="music" src="https://cdn.pixabay.com/download/audio/2021/09/06/audio_7a42e6cba5.mp3?filename=romantic-song-110734.mp3" autoplay loop></audio>
+
+<h1>Happy Boy's Day 19/11</h1>
+<h2>Babi ❤️</h2>
+
+<!-- Thông điệp -->
 <div class="container">
+    <p id="message" class="typing"></p>
+</div>
 
-    <!-- Icon glow -->
-    <div class="glow" style="left: 10px; top: 10px;"></div>
-    <div class="glow" style="right: 10px; top: 20px;"></div>
-    <div class="glow" style="left: 40px; bottom: 20px;"></div>
-    <div class="glow" style="right: 40px; bottom: 30px;"></div>
+<!-- Câu hỏi -->
+<div class="question-box" id="questionBox">
+    <h2>Đằng ấy có yêu em hong? 🥺💗</h2>
+    <button class="btn" onclick="yesLove()">Có 💞</button>
+    <button class="btn" onclick="noLove()">Không 😳</button>
+</div>
 
-    <!-- 4 ảnh -->
-    <img src="images/1.jpg" class="side-img left-top">
-    <img src="images/2.jpg" class="side-img left-bottom">
-    <img src="images/3.jpg" class="side-img right-top">
-    <img src="images/4.jpg" class="side-img right-bottom">
+<!-- Chọn lại màn -->
+<div class="ask-out" id="noBox">
+    <h2>Chọn lại đi 😡😡😡</h2>
+    <button class="btn" onclick="backQuestion()">Em xin lỗi màaaa 😭💗</button>
+</div>
 
-    <h1>Happy Boy's Day 19/11</h1>
-    <div class="subtitle">Babi ❤️</div>
-
-    <!-- FLOW -->
-    <div id="step1" class="question">
-        Anh có yêu em không? <br><br>
-        <button onclick="goToStep2()">Không 😳</button>
-        <button onclick="goToStep2()">Có 😘</button>
-    </div>
-
-    <div id="step2" class="question" style="display: none;">
-        Chọn lại đi cục cưng -.- <br><br>
-        <button onclick="goToStep3()">Có ạ 😍</button>
-        <button onclick="goToStep3()">Có chứ 😘</button>
-    </div>
-
-    <div id="step3" class="question" style="display: none;">
-        Đằng ấy mai có muốn đi chơi với em không? <br><br>
-        <button onclick="goToStep4()">Anh có ❤️</button>
-        <button onclick="goToStep4()">Đi chứ 💕</button>
-    </div>
-
-    <div id="step4" class="question" style="display: none;">
-        Điii nhưng mà anh muốn đi đâu? <br><br>
-        <button onclick="showMessage()">Sang mess nhắn nhìe 💌</button>
-    </div>
-
-    <!-- THÔNG ĐIỆP ĐÁNH MÁY -->
-    <div id="thongdiep" style="
-        display:none; 
-        margin-top:70px; 
-        font-size:22px; 
-        width:70%; 
-        margin-left:auto; 
-        margin-right:auto; 
-        font-weight:500; 
-        line-height:1.7;
-        text-align:justify;
-        white-space:pre-line;
-    "></div>
-
+<!-- Đi chơi -->
+<div class="ask-out" id="yesBox">
+    <h2>Vậy mai đằng ấy có muốn đi chơi với em hong? 😳💗</h2>
+    <button class="btn">Cóaa 😚💞</button>
 </div>
 
 <script>
-/* Nội dung thông điệp */
-const messageText = `Chào đằng ấy nhéee 💗
+/* Hiệu ứng gõ chữ */
+const text = 
+`Chào đằng ấy nhéee 💗
 
 Mình ẩn danh nhờ bên này gửi lời tới bạn Nguyễn Thành Trung. Bạn Trung nghe rõ trả lời ạ.
 Nay 19/11, hì lời đầu tiên em xin được nói i love youuu <3
@@ -178,59 +128,55 @@ Không muốn sến nhưng mà cảm ơn đằng ấy take care mình tận tìn
 Có gì đưa review của mình cho khách sau xem cũng được :)))
 
 Nhưng màaa hay khóc nhè cá, mít ướt ghê. Em biết là định hướng của em làm anh lo với suy nghĩ nhiều,
-em cũng không hứa sẽ cố gắng giữ liên lạc hay gì đâu nhưng mình cứ hết mình ở hiện tại ii.
+em cũng không hứa sẽ bên nhau trọn đời:)) hay gì đâu nhưng mình cứ hết mình ở hiện tại ii.
 
 À với cả em cũng muốn anh phát triển bản thân, nhưng cũng không muốn anh bị áp lực quá :))
 Em thấy vừa phát triển vừa have fun vẫn tốt hơn là anh phải suy nghĩ làm sao để làm được điều gì thật lớn.
-(Anh bảo vì em làm nhiều cái quá nhưng mà em cũng bình thường mò, ở nhà mẹ mắng em lười suốt :<)
 
-Nay nhắn nhủ bbi phải sống thoải mái, không phải lo lắng gì cả.
-wo ai nii, saranghaee, iu anhh <3`;
+Nay nhắn nhủ bbi phải sống thoải mái, không phải lo lắng gì cạ.
+Wo ai nii, Saranghae, iu anhhh 💗💗💗
 
-/* Hiệu ứng gõ chữ */
-function typeWriter(text, i = 0) {
+Giờ qua mess reaction em xem nàoo`;
+
+let i = 0;
+function typeEffect() {
     if (i < text.length) {
-        document.getElementById("thongdiep").innerHTML += text.charAt(i);
-        setTimeout(() => typeWriter(text, i + 1), 35);
+        document.getElementById("message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 35);
+    } else {
+        document.getElementById("questionBox").style.display = "block";
     }
 }
+typeEffect();
 
-function goToStep2() {
-    step1.style.display = "none";
-    step2.style.display = "block";
-}
-function goToStep3() {
-    step2.style.display = "none";
-    step3.style.display = "block";
-}
-function goToStep4() {
-    step3.style.display = "none";
-    step4.style.display = "block";
-}
-
-function showMessage() {
-    document.getElementById('step4').style.display = "none";
-    const td = document.getElementById('thongdiep');
-    td.style.display = "block";
-    td.innerHTML = ""; 
-    typeWriter(messageText);
-}
-
-/* Trái tim rơi */
+/* Trái tim rơi rộng toàn màn */
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
-
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (22 + Math.random() * 15) + "px";
-
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 3000);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 200);
+
+/* Câu hỏi logic */
+function yesLove() {
+    document.getElementById("questionBox").style.display = "none";
+    document.getElementById("yesBox").style.display = "block";
 }
 
-setInterval(createHeart, 400);
+function noLove() {
+    document.getElementById("questionBox").style.display = "none";
+    document.getElementById("noBox").style.display = "block";
+}
 
+function backQuestion() {
+    document.getElementById("noBox").style.display = "none";
+    document.getElementById("questionBox").style.display = "block";
+}
 </script>
 
 </body>
