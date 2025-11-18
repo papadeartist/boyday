@@ -1,146 +1,236 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Boy's Day 19/11</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Boy's Day 19/11</title>
 
-    <style>
-        body {
-            background: url('images/5.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            backdrop-filter: blur(3px);
-        }
+<style>
+    body {
+        background: url('images/5.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 
-        .container {
-            padding-top: 40px;
-            background-color: rgba(255, 240, 245, 0.8);
-            min-height: 100vh;
-        }
+    .container {
+        padding-top: 40px;
+        background-color: rgba(255, 240, 245, 0.8);
+        min-height: 100vh;
+        position: relative;
+    }
 
-        h1 {
-            font-size: 36px;
-            color: #333;
-        }
+    h1 {
+        font-size: 48px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-        .subtitle {
-            font-size: 22px;
-            margin-top: -10px;
-            color: #ff5e7e;
-        }
+    .subtitle {
+        font-size: 26px;
+        margin-top: -5px;
+        color: #ff3d6c;
+        font-weight: bold;
+    }
 
-        .question {
-            margin-top: 30px;
-            font-size: 20px;
-        }
+    .question {
+        margin-top: 40px;
+        font-size: 26px;
+        font-weight: 500;
+    }
 
-        button {
-            margin: 10px;
-            padding: 12px 24px;
-            background-color: #ff8eb3;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    button {
+        margin: 12px;
+        padding: 14px 30px;
+        background-color: #ff8eb3;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-        button:hover {
-            background-color: #ff6e9d;
-        }
+    button:hover {
+        background-color: #ff6e9d;
+        transform: scale(1.05);
+    }
 
-        .side-img {
-            width: 120px;
-            position: absolute;
-        }
+    /* Ảnh trang trí hai bên */
+    .side-img {
+        width: 160px;
+        border-radius: 18px;
+        position: absolute;
+        box-shadow: 0 0 15px rgba(255, 100, 130, 0.7);
+    }
 
-        .left-top { left: 10px; top: 50px; }
-        .left-bottom { left: 10px; top: 250px; }
-        .right-top { right: 10px; top: 50px; }
-        .right-bottom { right: 10px; top: 250px; }
-    </style>
+    .left-top { left: 20px; top: 70px; }
+    .left-bottom { left: 20px; top: 310px; }
+    .right-top { right: 20px; top: 70px; }
+    .right-bottom { right: 20px; top: 310px; }
 
+    /* Icon glow online */
+    .glow {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background: #00ff00;
+        border-radius: 50%;
+        box-shadow: 0 0 12px #00ff00, 0 0 22px #00ff00;
+        animation: pulse 1.4s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(0.9); opacity: 0.7; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    /* Trái tim rơi */
+    .heart {
+        position: fixed;
+        top: -10px;
+        color: #ff5e7e;
+        font-size: 24px;
+        animation: fall 3s linear forwards;
+        pointer-events: none;
+        z-index: 9999;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+</style>
 </head>
+
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- 4 ảnh trang trí -->
-        <img src="images/1.jpg" class="side-img left-top">
-        <img src="images/2.jpg" class="side-img left-bottom">
-        <img src="images/3.jpg" class="side-img right-top">
-        <img src="images/4.jpg" class="side-img right-bottom">
+    <!-- Icon glow -->
+    <div class="glow" style="left: 10px; top: 10px;"></div>
+    <div class="glow" style="right: 10px; top: 20px;"></div>
+    <div class="glow" style="left: 40px; bottom: 20px;"></div>
+    <div class="glow" style="right: 40px; bottom: 30px;"></div>
 
-        <h1>Happy Boy's Day 19/11</h1>
-        <div class="subtitle">Anh Yêu ❤️</div>
+    <!-- 4 ảnh -->
+    <img src="images/1.jpg" class="side-img left-top">
+    <img src="images/2.jpg" class="side-img left-bottom">
+    <img src="images/3.jpg" class="side-img right-top">
+    <img src="images/4.jpg" class="side-img right-bottom">
 
-        <!-- FLOW -->
+    <h1>Happy Boy's Day 19/11</h1>
+    <div class="subtitle">Babi ❤️</div>
 
-        <div id="step1" class="question">
-            Anh có yêu em không?  
-            <br><br>
-            <button onclick="goToStep2()">Không 😳</button>
-            <button onclick="goToStep2()">Có 😘</button>
-        </div>
-
-        <div id="step2" class="question" style="display: none;">
-            Chọn câu trả lời đi nè
-            <br><br>
-            <button onclick="goToStep3()">Có ạ 😍</button>
-            <button onclick="goToStep3()">Có chứ 😘</button>
-        </div>
-
-        <div id="step3" class="question" style="display: none;">
-            Đằng ấy mai có muốn đi chơi với em không?
-            <br><br>
-            <button onclick="goToStep4()">Anh có ❤️</button>
-            <button onclick="goToStep4()">Đi chứ 💕</button>
-        </div>
-
-        <div id="step4" class="question" style="display: none;">
-            Điii nhưng mà anh muốn đi đâu?
-            <br><br>
-            <button onclick="showMessage()">Sang mess nhắn nhìe 💌</button>
-        </div>
-
-        <!-- THÔNG ĐIỆP (ẩn khi chưa bấm) -->
-        <div id="thongdiep" style="display: none; margin-top: 80px; font-size: 18px;">
-            (Chào đằng ấy nhéee
-Mình ẩn danh nhờ bên này gửi lời tới bạn Nguyễn Thành Trung. Bạn Trung nghe rõ trả lời ạ.
-Nay 19/11, hì lời đầu tiên em xin được nói i love youuu <3
-Không muốn sến nhưng mà củm ơn đằng ấy take care mình tận tình, đánh giá service 5 sao. Có gì đưa review của mình cho khách sau xem cũng được:)))
-Nhưng màaa hay khóc nhè cá, mít ướt. Em biết là định hướng của em làm anh lo với suy nghĩ nhìu, em cũng không hứa sẽ cố gắng giữ liên lạc hay gì đâu nhưng mình cứ hết mình ở hiện tại ii.
-À với cảa em cũm muốn anh phát triển bản thân nhưng cũng không muốn anh bị áp lực quá:)) Em thấy vừa phát triển vừa have fun vẫn tốt hơn là anh phải suy nghĩ làm sao để mình làm được điều gì thật lớn (anh bảo vì em làm nhìu cái quá nhưng mà em cũm bình thường mò, ở nhà mẹ mắng em lười suốt :<)
-Nay nhắn nhủ bbi phải sống thoải mái không phải lo lắng gì cạ, wo ai nii, saranghaee, iu anhh <3)
-        </div>
-
+    <!-- FLOW -->
+    <div id="step1" class="question">
+        Anh có yêu em không? <br><br>
+        <button onclick="goToStep2()">Không 😳</button>
+        <button onclick="goToStep2()">Có 😘</button>
     </div>
 
+    <div id="step2" class="question" style="display: none;">
+        Chọn lại đi cục cưng -.- <br><br>
+        <button onclick="goToStep3()">Có ạ 😍</button>
+        <button onclick="goToStep3()">Có chứ 😘</button>
+    </div>
+
+    <div id="step3" class="question" style="display: none;">
+        Đằng ấy mai có muốn đi chơi với em không? <br><br>
+        <button onclick="goToStep4()">Anh có ❤️</button>
+        <button onclick="goToStep4()">Đi chứ 💕</button>
+    </div>
+
+    <div id="step4" class="question" style="display: none;">
+        Điii nhưng mà anh muốn đi đâu? <br><br>
+        <button onclick="showMessage()">Sang mess nhắn nhìe 💌</button>
+    </div>
+
+    <!-- THÔNG ĐIỆP ĐÁNH MÁY -->
+    <div id="thongdiep" style="
+        display:none; 
+        margin-top:70px; 
+        font-size:22px; 
+        width:70%; 
+        margin-left:auto; 
+        margin-right:auto; 
+        font-weight:500; 
+        line-height:1.7;
+        text-align:justify;
+        white-space:pre-line;
+    "></div>
+
+</div>
+
 <script>
-    function goToStep2() {
-        document.getElementById('step1').style.display = "none";
-        document.getElementById('step2').style.display = "block";
-    }
+/* Nội dung thông điệp */
+const messageText = `Chào đằng ấy nhéee 💗
 
-    function goToStep3() {
-        document.getElementById('step2').style.display = "none";
-        document.getElementById('step3').style.display = "block";
-    }
+Mình ẩn danh nhờ bên này gửi lời tới bạn Nguyễn Thành Trung. Bạn Trung nghe rõ trả lời ạ.
+Nay 19/11, hì lời đầu tiên em xin được nói i love youuu <3
 
-    function goToStep4() {
-        document.getElementById('step3').style.display = "none";
-        document.getElementById('step4').style.display = "block";
-    }
+Không muốn sến nhưng mà cảm ơn đằng ấy take care mình tận tình, đánh giá service 5 sao.
+Có gì đưa review của mình cho khách sau xem cũng được :)))
 
-    function showMessage() {
-        document.getElementById('step4').style.display = "none";
-        document.getElementById('thongdiep').style.display = "block";
+Nhưng màaa hay khóc nhè cá, mít ướt ghê. Em biết là định hướng của em làm anh lo với suy nghĩ nhiều,
+em cũng không hứa sẽ cố gắng giữ liên lạc hay gì đâu nhưng mình cứ hết mình ở hiện tại ii.
+
+À với cả em cũng muốn anh phát triển bản thân, nhưng cũng không muốn anh bị áp lực quá :))
+Em thấy vừa phát triển vừa have fun vẫn tốt hơn là anh phải suy nghĩ làm sao để làm được điều gì thật lớn.
+(Anh bảo vì em làm nhiều cái quá nhưng mà em cũng bình thường mò, ở nhà mẹ mắng em lười suốt :<)
+
+Nay nhắn nhủ bbi phải sống thoải mái, không phải lo lắng gì cả.
+wo ai nii, saranghaee, iu anhh <3`;
+
+/* Hiệu ứng gõ chữ */
+function typeWriter(text, i = 0) {
+    if (i < text.length) {
+        document.getElementById("thongdiep").innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 35);
     }
+}
+
+function goToStep2() {
+    step1.style.display = "none";
+    step2.style.display = "block";
+}
+function goToStep3() {
+    step2.style.display = "none";
+    step3.style.display = "block";
+}
+function goToStep4() {
+    step3.style.display = "none";
+    step4.style.display = "block";
+}
+
+function showMessage() {
+    document.getElementById('step4').style.display = "none";
+    const td = document.getElementById('thongdiep');
+    td.style.display = "block";
+    td.innerHTML = ""; 
+    typeWriter(messageText);
+}
+
+/* Trái tim rơi */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (22 + Math.random() * 15) + "px";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+}
+
+setInterval(createHeart, 400);
+
 </script>
 
 </body>
