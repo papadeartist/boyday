@@ -1,389 +1,186 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Happy Birthday babi &lt;3 — Photobooth</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Babe</title>
   <style>
-    :root{
-      --accent:#ff78a1;
-      --accent-dark:#ff4f84;
-      --bg: #fff0f4;
-    }
-    body{
-      margin:0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, #fff3f6 0%, #ffeef2 100%);
-      color:#222;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      min-height:100vh;
-      padding:30px;
-      box-sizing:border-box;
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url("assets/background.jpg") center/cover no-repeat fixed;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 0 0 10px rgba(0,0,0,0.6);
     }
 
-    .card{
-      width:960px;
-      max-width:98%;
-      background: rgba(255,255,255,0.85);
-      border-radius:16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      padding:28px;
-      position:relative;
-      overflow:hidden;
+    .title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
-    header{
-      text-align:center;
-      margin-bottom:18px;
-    }
-    h1{ font-size:36px; margin:0; letter-spacing:0.5px; }
-    .date{ color:var(--accent-dark); margin-top:6px; font-weight:600; }
-
-    .typing{
-      margin-top:14px;
-      font-size:18px;
-      color:#333;
-      min-height:26px;
+    .subtitle {
+      font-size: 22px;
+      margin-bottom: 30px;
     }
 
-    .heart-btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-top:14px;
-      padding:12px 18px;
-      background:linear-gradient(180deg,var(--accent),var(--accent-dark));
-      color:white;
-      border-radius:28px;
-      border:none;
-      cursor:pointer;
-      font-size:16px;
-      box-shadow: 0 6px 18px rgba(255,120,161,0.25);
+    .typing {
+      font-size: 20px;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      min-height: 40px;
+      margin-bottom: 30px;
     }
 
-    /* photobooth area */
-    .photobooth{
-      margin-top:22px;
-      display:flex;
-      gap:20px;
-      align-items:flex-start;
-      justify-content:space-between;
-      flex-wrap:wrap;
+    .heart-btn {
+      width: 90px;
+      height: 90px;
+      background: red;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      transition: 0.2s;
     }
 
-    .live-area{
-      flex:1 1 560px;
-      min-width:320px;
-      background:linear-gradient(180deg,#fff,#fff0f5);
-      border-radius:12px;
-      padding:14px;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+    .heart-btn:hover {
+      transform: scale(1.1);
     }
 
-    video{
-      width:100%;
-      max-width:520px;
-      height:360px;
-      background:#000;
-      border-radius:12px;
-      object-fit:cover;
-      border:6px solid rgba(255,255,255,0.8);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    /* Photobooth frame */
+    #camera-section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 20px;
     }
 
-    .controls{
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-    .btn{
-      padding:10px 14px;
-      border-radius:10px;
-      border:none;
-      cursor:pointer;
-      font-weight:600;
-      background:#fff;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-    }
-    .btn.capture{ background: linear-gradient(180deg,var(--accent-dark),var(--accent)); color:white; }
-
-    /* preview */
-    .preview{
-      width:320px;
-      min-width:260px;
-      background: rgba(255,255,255,0.95);
-      border-radius:12px;
-      padding:12px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-    canvas.preview-canvas{
-      width:100%;
-      border-radius:10px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    video {
+      width: 320px;
+      height: 420px;
+      background: black;
+      border-radius: 15px;
+      margin-bottom: 20px;
     }
 
-    /* frame overlay (visual frame drawn on top of video and applied on final image) */
-    .frame-overlay{
+    .frame {
+      position: relative;
+      width: 340px;
+      padding: 10px;
+      background: white;
+      border-radius: 20px;
+      color: black;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .stickers {
       position: absolute;
-      pointer-events:none;
-      left:50%;
-      transform:translateX(-50%);
-      width:520px;
-      height:360px;
-      top:110px; /* calculated relative to card */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
-    /* decorative uploaded image (from your upload), using local path provided */
     .sticker {
-      position:absolute;
-      width:110px;
-      height:110px;
-      object-fit:cover;
-      border-radius:12px;
-      right:18px;
-      top:18px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      width: 80px;
+      position: absolute;
+      animation: float 3s infinite ease-in-out;
     }
 
-    /* responsive tweak */
-    @media (max-width:920px){
-      .photobooth{ flex-direction:column; align-items:center; }
-      .frame-overlay{ display:none; } /* hide absolute overlay on small screen (we still draw frame in canvas) */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <header>
-      <h1>Happy Birthday babi &lt;3</h1>
-      <div class="date">23/11</div>
 
-      <div class="typing" id="typing"></div>
+  <div class="title">Birthday Babe</div>
+  <div class="subtitle">23 - 11</div>
 
-      <button class="heart-btn" id="openBtn" aria-label="Bấm trái tim">
-        ❤️ Bấm trái tim xem điều bất ngờ
-      </button>
-    </header>
+  <div class="typing" id="typing"></div>
 
-    <div class="photobooth">
-      <div class="live-area" id="liveArea">
-        <!-- video stream -->
-        <div style="position:relative; width:100%; display:flex; justify-content:center;">
-          <video id="video" autoplay playsinline></video>
+  <div class="heart-btn" id="heart">❤️</div>
 
-          <!-- visual frame shown over video for preview on desktop -->
-          <svg class="frame-overlay" width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
-                <stop offset="0" stop-color="#fff0f4"/>
-                <stop offset="1" stop-color="#ffd6e6"/>
-              </linearGradient>
-            </defs>
-            <!-- border -->
-            <rect x="0" y="0" width="520" height="360" rx="18" fill="none" stroke="rgba(255,120,161,0.95)" stroke-width="12"/>
-            <!-- top ribbon -->
-            <rect x="0" y="0" width="520" height="70" rx="18" fill="rgba(255,255,255,0.92)"/>
-            <text x="50%" y="42" text-anchor="middle" font-size="24" font-weight="700" fill="#ff4f84" font-family="Segoe UI, Roboto">Birthday Babe - 23/11</text>
-          </svg>
-        </div>
+  <!-- CAMERA SECTION -->
+  <div id="camera-section">
+    <video id="camera" autoplay></video>
+    <button onclick="capturePhoto()" style="padding:10px 20px; font-size:18px; cursor:pointer;">📸 Chụp ảnh</button>
+    <canvas id="canvas" width="320" height="420" style="display:none;"></canvas>
 
-        <div class="controls">
-          <button class="btn" id="toggleCam">Bật Camera</button>
-          <button class="btn capture" id="captureBtn">Chụp ảnh</button>
-          <button class="btn" id="stopCam">Tắt Camera</button>
-        </div>
-      </div>
-
-      <div class="preview">
-        <div style="font-weight:700">Ảnh preview</div>
-        <canvas class="preview-canvas" id="canvas" width="520" height="360"></canvas>
-        <div style="display:flex; gap:8px; width:100%; justify-content:center;">
-          <a id="downloadLink" class="btn" download="birthday-babi.png">Tải ảnh về</a>
-          <button class="btn" id="retake">Chụp lại</button>
-        </div>
+    <div id="photo-result" class="frame" style="display:none;">
+      <div>Birthday Babe - 23/11</div>
+      <img id="captured-img" style="width:100%; margin-top:10px; border-radius:12px;" />
+      <div class="stickers">
+        <img src="assets/sticker1.png" class="sticker" style="top:10px; left:10px;">
+        <img src="assets/sticker2.png" class="sticker" style="bottom:10px; right:10px;">
       </div>
     </div>
-
-    <!-- decorative sticker (from upload) -->
-    <img class="sticker" src="/mnt/data/7937a73f-74ea-4826-a19a-9dd450dacb3d.png" alt="sticker">
-
   </div>
 
   <script>
-    // TYPING effect
-    const textToType = "nếu theo web lần trước thì không vui nữa rồi, lần này em muốn đổi chút, anh đoán xem bấm vào trái tim dưới đây sẽ là gì?";
-    const typingEl = document.getElementById('typing');
-    let i=0;
-    function typeStep(){
-      if(i < textToType.length){
-        typingEl.textContent += textToType.charAt(i);
+    /* Typing effect */
+    const text = "nếu theo web lần trước thì không vui nữa rồi, lần này em muốn đổi chút, anh đoán xem bấm vào trái tim dưới đây sẽ là gì?";
+    let i = 0;
+    function typingEffect() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeStep, 35 + Math.random()*40);
+        setTimeout(typingEffect, 40);
       }
     }
-    // start typing when page loads
-    window.addEventListener('load', ()=> setTimeout(typeStep,700));
+    typingEffect();
 
-    // photobooth logic
-    const openBtn = document.getElementById('openBtn');
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const captureBtn = document.getElementById('captureBtn');
-    const downloadLink = document.getElementById('downloadLink');
-    const toggleCam = document.getElementById('toggleCam');
-    const stopCam = document.getElementById('stopCam');
-    const retake = document.getElementById('retake');
+    /* Heart click → open photobooth */
+    document.getElementById("heart").onclick = () => {
+      document.getElementById("camera-section").style.display = "flex";
+      startCamera();
+    };
 
-    let stream = null;
-
-    async function startCamera(){
-      try {
-        if(stream) return;
-        stream = await navigator.mediaDevices.getUserMedia({ video:{ width:1280, height:720 }, audio:false });
-        video.srcObject = stream;
-      } catch(err){
-        alert("Không truy cập được camera. Vui lòng cho phép quyền camera trong trình duyệt.");
-        console.error(err);
-      }
+    function startCamera() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          document.getElementById("camera").srcObject = stream;
+        });
     }
 
-    function stopCamera(){
-      if(stream){
-        stream.getTracks().forEach(t=>t.stop());
-        stream = null;
-        video.srcObject = null;
-      }
+    /* Capture photo */
+    function capturePhoto() {
+      const video = document.getElementById("camera");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const imgURL = canvas.toDataURL("image/png");
+      document.getElementById("captured-img").src = imgURL;
+
+      document.getElementById("photo-result").style.display = "block";
     }
-
-    // open button: smooth scroll xuống photobooth và bật camera
-    openBtn.addEventListener('click', async () => {
-      // scroll to live area
-      document.getElementById('liveArea').scrollIntoView({behavior:'smooth', block:'center'});
-      // quick pulse animation
-      openBtn.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:420});
-      await startCamera();
-    });
-
-    toggleCam.addEventListener('click', startCamera);
-    stopCam.addEventListener('click', stopCamera);
-
-    captureBtn.addEventListener('click', () => {
-      if(!stream){
-        alert("Vui lòng bật camera trước khi chụp.");
-        return;
-      }
-      // draw video frame into canvas
-      // ensure aspect ratio: canvas is 520x360 (matches frame)
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      // draw video scaled to canvas
-      // compute scaling to cover canvas
-      const vw = video.videoWidth;
-      const vh = video.videoHeight;
-      if(vw && vh){
-        // draw centered crop
-        const videoRatio = vw / vh;
-        const canvasRatio = canvas.width / canvas.height;
-        let sx, sy, sWidth, sHeight;
-        if(videoRatio > canvasRatio){
-          // video wider -> crop sides
-          sHeight = vh;
-          sWidth = vh * canvasRatio;
-          sx = (vw - sWidth) / 2;
-          sy = 0;
-        } else {
-          // video taller -> crop top/bottom
-          sWidth = vw;
-          sHeight = vw / canvasRatio;
-          sx = 0;
-          sy = (vh - sHeight) / 2;
-        }
-        ctx.drawImage(video, sx, sy, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
-      } else {
-        // fallback
-        ctx.fillStyle = "#000"; ctx.fillRect(0,0,canvas.width,canvas.height);
-      }
-
-      // draw frame ring (same as visual overlay)
-      ctx.strokeStyle = "rgba(255,79,132,0.95)";
-      ctx.lineWidth = 12;
-      roundRectStroke(ctx, 6, 6, canvas.width-12, canvas.height-12, 18);
-
-      // top banner
-      ctx.fillStyle = "rgba(255,255,255,0.92)";
-      ctx.fillRect(6,6, canvas.width-12, 70);
-
-      // top text
-      ctx.fillStyle = "#ff4f84";
-      ctx.font = "700 24px 'Segoe UI', Arial";
-      ctx.textAlign = "center";
-      ctx.fillText("Birthday Babe - 23/11", canvas.width/2, 42);
-
-      // optional small decorations: heart at bottom right
-      ctx.font = "700 28px 'Segoe UI'";
-      ctx.fillText("💖", canvas.width - 36, canvas.height - 24);
-
-      // optional stamp: draw user's uploaded image small bottom-left
-      const sticker = new Image();
-      // using local uploaded file path (provided)
-      sticker.src = "/mnt/data/7937a73f-74ea-4826-a19a-9dd450dacb3d.png";
-      sticker.onload = () => {
-        const sw = 92, sh = 92;
-        ctx.drawImage(sticker, 14, canvas.height - sh - 14, sw, sh);
-        // enable download after sticker drawn
-        const dataURL = canvas.toDataURL("image/png");
-        downloadLink.href = dataURL;
-      };
-      sticker.onerror = () => {
-        // if sticker failed, still provide download
-        const dataURL = canvas.toDataURL("image/png");
-        downloadLink.href = dataURL;
-      };
-    });
-
-    // helper: rounded rectangle stroke
-    function roundRectStroke(ctx, x, y, w, h, r){
-      ctx.beginPath();
-      ctx.moveTo(x+r, y);
-      ctx.lineTo(x+w-r, y);
-      ctx.quadraticCurveTo(x+w, y, x+w, y+r);
-      ctx.lineTo(x+w, y+h-r);
-      ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-      ctx.lineTo(x+r, y+h);
-      ctx.quadraticCurveTo(x, y+h, x, y+h-r);
-      ctx.lineTo(x, y+r);
-      ctx.quadraticCurveTo(x, y, x+r, y);
-      ctx.closePath();
-      ctx.stroke();
-    }
-
-    // retake resets canvas (clear) and keep camera on
-    retake.addEventListener('click', () => {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      downloadLink.href = "#";
-    });
-
-    // prepare initial state: disable download link
-    downloadLink.href = "#";
-    // when user clicks download, if href is dataURL it's fine. Otherwise alert
-    downloadLink.addEventListener('click', (e)=>{
-      if(downloadLink.href === "#" || downloadLink.href === window.location.href + "#"){
-        e.preventDefault();
-        alert("Chưa có ảnh để tải. Hãy chụp trước nhé!");
-      }
-    });
-
-    // stop camera when user leaves page
-    window.addEventListener('beforeunload', stopCamera);
   </script>
+
 </body>
 </html>
